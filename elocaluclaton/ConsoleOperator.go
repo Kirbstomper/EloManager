@@ -60,3 +60,39 @@ func (o Operator) CalculateEloForPlayers(tagA, tagB string, outcome int) (int, i
 	a, b := CalculateElo(playerA.Elo, playerB.Elo, outcome)
 	return a, b, err
 }
+
+/*
+	Updates the elo for a given player if they exist
+*/
+func (o Operator) UpdateEloForPlayer(tag string, newElo int) error {
+	err := o.repo.UpdatePlayerElo(tag, newElo)
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+	log.Println("Updated Player:", tag, " | Elo:", newElo)
+	return err
+}
+
+/*
+	Updates Elo for Two given players based on outcome of match
+*/
+func (o Operator) RunMatch(tagA, tagB string, outcome int) error {
+	eloA, eloB, err := o.CalculateEloForPlayers(tagA, tagB, outcome)
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+	err = o.UpdateEloForPlayer(tagA, eloA)
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+	err = o.UpdateEloForPlayer(tagB, eloB)
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+
+	return err
+}
