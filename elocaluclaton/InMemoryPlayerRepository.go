@@ -9,6 +9,9 @@ type InMemoryPlayerRepository struct {
 	players map[string]Player
 }
 
+func createInMemoryRepository() InMemoryPlayerRepository {
+	return InMemoryPlayerRepository{make(map[string]Player)}
+}
 func (r InMemoryPlayerRepository) AddPlayer(p Player) error {
 	if p.Tag == "" {
 		return errors.New("Player Name Cannot Be Empty")
@@ -33,4 +36,16 @@ func (r InMemoryPlayerRepository) GetPlayer(tag string) (Player, error) {
 		return p, errors.New("Player with tag[" + tag + "] Does Not Exist")
 	}
 	return p, nil
+}
+
+func (r InMemoryPlayerRepository) UpdatePlayerElo(tag string, newElo int) error {
+	p, err := r.GetPlayer(tag)
+	if err != nil {
+		return err
+	}
+	if newElo < 0 {
+		return errors.New("New Elo Cannot Be Negative")
+	}
+	r.players[p.Tag] = Player{Tag: tag, Elo: newElo}
+	return err
 }
