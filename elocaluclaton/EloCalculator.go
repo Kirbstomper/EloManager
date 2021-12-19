@@ -21,7 +21,7 @@ const (
 	outcome: the outcome for player 1
 */
 func CalculateElo(pa int, pb int, outcome int) (int, int) {
-	println("Calculating elo")
+	
 	expectedA, expectedB := CalculateExpected(pa, pb), CalculateExpected(pb, pa)
 
 	switch outcome {
