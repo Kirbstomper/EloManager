@@ -1,19 +1,13 @@
 package main
 
-import calc "PlayerElo/elocaluclaton"
+import "PlayerElo/elocaluclaton"
+
+var operator elocaluclaton.Operator
 
 func main() {
-	p1 := 1000
-	p2 := 1100
-	println("Player 1: ", p1, " | Player 2 ", p2)
+	operator = elocaluclaton.CreateInMemoryOperator()
+	operator.CreateNewPlayer("chris", 1000)
+	operator.CreateNewPlayer("paul", 1000)
 
-	p1, p2 = calc.CalculateElo(p1, p2, calc.TIE)
-	println("Player 1: ", p1, " | Player 2 ", p2)
-
-	p1, p2 = calc.CalculateElo(p1, p2, calc.TIE)
-	println("Player 1: ", p1, " | Player 2 ", p2)
-
-	p1, p2 = calc.CalculateElo(p1, p2, calc.LOSS)
-	println("Player 1: ", p1, " | Player 2 ", p2)
-
+	print(operator.CalculateEloForPlayers("paul", "chris", elocaluclaton.WIN))
 }
