@@ -65,5 +65,26 @@ func (r RelationalDBPlayerRepository) AddPlayer(p Player) error {
 	return err
 }
 
-//func (RelationalDBPlayerRepository) GetPlayer(string) (Player, error)
+func (r RelationalDBPlayerRepository) GetPlayer(tag string) (Player, error) {
+	var p Player
+	err := ValidateGetPlayer(tag)
+	if err != nil {
+		return p, nil
+	}
+	stmt, err := r.db.ctx.Prepare("SELECT tag,elo FROM players WHERE tag=?")
+	if err != nil {
+		return p, err
+	}
+	defer stmt.Close()
+	var t string
+	var e int
+
+	err = stmt.QueryRow(tag).Scan(&t, &e)
+	if err != nil {
+		return p, err
+	}
+	p = Player{Tag: t, Elo: e}
+	return p, err
+}
+
 //func (RelationalDBPlayerRepository) UpdatePlayerElo(string, int) error

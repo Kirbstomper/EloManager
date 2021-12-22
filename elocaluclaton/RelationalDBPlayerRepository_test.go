@@ -40,3 +40,28 @@ func Test_AddPlayerSuccess(t *testing.T) {
 		os.RemoveAll("data")
 	})
 }
+
+func Test_GetPlayerSuccess(t *testing.T) {
+	r := createRelationalDBPlayerRepository()
+
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirb", 1000)
+	if err != nil {
+		println(err)
+		t.Fail()
+	}
+	p, err := r.GetPlayer("Kirb")
+
+	if err != nil {
+		println(err)
+		t.Fail()
+	}
+	if p.Tag != "Kirb" {
+		t.Fail()
+	}
+	if p.Elo != 1000 {
+		t.Fail()
+	}
+	t.Cleanup(func() {
+		os.RemoveAll("data")
+	})
+}
