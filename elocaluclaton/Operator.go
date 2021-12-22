@@ -21,6 +21,7 @@ func CreateInMemoryOperator() Operator {
 */
 func (o Operator) CreateNewPlayer(tag string, elo int) error {
 	p := Player{Tag: tag, Elo: elo}
+
 	err := o.repo.AddPlayer(p)
 	if err != nil {
 		log.Println(err.Error())

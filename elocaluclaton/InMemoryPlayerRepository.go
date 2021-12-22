@@ -13,11 +13,9 @@ func createInMemoryRepository() InMemoryPlayerRepository {
 	return InMemoryPlayerRepository{make(map[string]Player)}
 }
 func (r InMemoryPlayerRepository) AddPlayer(p Player) error {
-	if p.Tag == "" {
-		return errors.New("Player Name Cannot Be Empty")
-	}
-	if p.Elo < 0 {
-		return errors.New("Player Elo Cannot be lower than 0")
+	err := ValidateAddPlayer(p)
+	if err != nil {
+		return err
 	}
 	if r.players[p.Tag].Tag != "" {
 		return errors.New("Player with this tag[" + p.Tag + "] already exists")
@@ -27,11 +25,13 @@ func (r InMemoryPlayerRepository) AddPlayer(p Player) error {
 }
 
 func (r InMemoryPlayerRepository) GetPlayer(tag string) (Player, error) {
-	p := r.players[tag]
-
-	if tag == "" {
-		return p, errors.New("Player Name Cannot Be Empty")
+	var p Player
+	err := ValidateGetPlayer(tag)
+	if err != nil {
+		return p, err
 	}
+	p = r.players[tag]
+
 	if p.Tag == "" {
 		return p, errors.New("Player with tag[" + tag + "] Does Not Exist")
 	}
@@ -43,9 +43,10 @@ func (r InMemoryPlayerRepository) UpdatePlayerElo(tag string, newElo int) error 
 	if err != nil {
 		return err
 	}
-	if newElo < 0 {
-		return errors.New("New Elo Cannot Be Negative")
+	err = ValidateUpdatePlayerElo(newElo)
+	if err != nil {
+		return err
 	}
 	r.players[p.Tag] = Player{Tag: tag, Elo: newElo}
-	return err
+	return nil
 }
