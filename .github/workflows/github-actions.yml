@@ -17,4 +17,6 @@ jobs:
           ls ${{ github.workspace }}
       - name: Build the project
         run: go build
+      - name: Test the project
+        run: go test ./...
       - run: echo "🍏 This job's status is ${{ job.status }}."
