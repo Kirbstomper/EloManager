@@ -14,6 +14,8 @@ const (
 	K = 32
 )
 
+var ResultsMap = map[string]int{"WIN": WIN, "LOSS": LOSS, "TIE": TIE}
+
 /*
 	Calculates and returns new elo ratings based on the outcome
 	p1: player 1's elo rating
@@ -21,7 +23,7 @@ const (
 	outcome: the outcome for player 1
 */
 func CalculateElo(pa int, pb int, outcome int) (int, int) {
-	
+
 	expectedA, expectedB := CalculateExpected(pa, pb), CalculateExpected(pb, pa)
 
 	switch outcome {
@@ -52,3 +54,4 @@ func CalculateNewRating(current int, k int, score float64, expected float64) int
 	newRating := float64(current) + float64(k)*(score-expected)
 	return int(newRating)
 }
+

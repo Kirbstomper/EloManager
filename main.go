@@ -8,12 +8,10 @@ import (
 )
 
 type Match struct {
-	PlayerA, PlayerB, result string
+	PlayerA, PlayerB, Result string
 }
 
 var operator elocaluclaton.Operator
-
-var resultsMap map[string]int
 
 /*
 	Adds one or more players to the registry based on input given
@@ -53,7 +51,7 @@ func Decide(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = operator.RunMatch(m.PlayerA, m.PlayerB, resultsMap[m.result])
+	err = operator.RunMatch(m.PlayerA, m.PlayerB, elocaluclaton.ResultsMap[m.Result])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -94,18 +92,10 @@ func RetrievePlayerInformation(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	resultsMap := make(map[string]int)
-	resultsMap["WIN"] = elocaluclaton.WIN
-	resultsMap["LOSS"] = elocaluclaton.LOSS
-	resultsMap["TIE"] = elocaluclaton.TIE
 
-	operator = elocaluclaton.CreateInMemoryOperator()
+	operator = elocaluclaton.CreateRealtionalDBOperator()
 	operator.CreateNewPlayer("chris", 1000)
 	operator.CreateNewPlayer("paul", 1000)
-	err := operator.RunMatch("paul", "chris", elocaluclaton.WIN)
-	if err != nil {
-		log.Println(err.Error())
-	}
 	operator.RetrievePlayerInformation("paul")
 	operator.RetrievePlayerInformation("chris")
 
