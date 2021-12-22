@@ -65,3 +65,25 @@ func Test_GetPlayerSuccess(t *testing.T) {
 		os.RemoveAll("data")
 	})
 }
+
+func Test_UpdatePlayerEloSuccess(t *testing.T) {
+	r := createRelationalDBPlayerRepository()
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
+	if err != nil {
+		t.Fail()
+	}
+
+	err = r.UpdatePlayerElo("Kirby", 700)
+	if err != nil {
+		t.Fail()
+	}
+	var elo int
+	err = r.db.ctx.QueryRow("SELECT elo FROM players WHERE tag=?", "Kirby").Scan(&elo)
+	if elo != 700 {
+		t.Fail()
+	}
+
+	t.Cleanup(func() {
+		os.RemoveAll("data")
+	})
+}

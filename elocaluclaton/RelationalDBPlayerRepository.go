@@ -87,4 +87,21 @@ func (r RelationalDBPlayerRepository) GetPlayer(tag string) (Player, error) {
 	return p, err
 }
 
-//func (RelationalDBPlayerRepository) UpdatePlayerElo(string, int) error
+func (r RelationalDBPlayerRepository) UpdatePlayerElo(tag string, elo int) error {
+	p, err := r.GetPlayer(tag)
+	if err != nil {
+		return err
+	}
+
+	err = ValidateUpdatePlayerElo(elo)
+	if err != nil {
+		return err
+	}
+
+	stmt, err := r.db.ctx.Prepare("UPDATE players SET elo = ? WHERE tag = ?")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(elo, p.Tag)
+	return err
+}
