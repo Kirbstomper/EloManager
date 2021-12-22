@@ -49,7 +49,7 @@ func Test_GetPlayerSuccess(t *testing.T) {
 		println(err)
 		t.Fail()
 	}
-	p, err := r.GetPlayer("K")
+	p, err := r.GetPlayer("Kirb")
 
 	if err != nil {
 		println(err)
