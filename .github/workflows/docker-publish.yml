@@ -77,6 +77,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
+      needs: [build]
       if: github.event_name != 'pull_request'
       name: Deploy app
       runs-on: ubuntu-latest
