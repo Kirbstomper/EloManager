@@ -15,11 +15,17 @@ Using s6-overlay[https://github.com/just-containers/s6-overlay] to run both my a
 Running the backend as a docker container
 - Build
 docker build -t elomapper .
+
+Then you should make your environmental variables availible
+
+export LITESTREAM_ACCESS_KEY_ID=xxxxxxxxxxxxxx
+export LITESTREAM_SECRET_ACCESS_KEY=xxxxxxxxxx
+export REPLICA_URL=xxxxxxxx
 - Run
 docker run \
   -p 8080:8080 \
   -v ${PWD}:/data \
-  -e REPLICA_URL=s3://elomapper-app/db \
+  -e REPLICA_URL \
   -e LITESTREAM_ACCESS_KEY_ID \
   -e LITESTREAM_SECRET_ACCESS_KEY \
   elomapper
