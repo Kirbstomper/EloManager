@@ -8,3 +8,7 @@ data/.repository.db-litestream/generations/1b37caef65ac29c9/wal/00000003.wal
 repository.db
 repository.db-shm
 repository.db-wal
+.repository.db-litestream/generation
+.gitignore
+.repository.db-litestream/generations/64fdbb0842ed024f/wal/00000000.wal
+.repository.db-litestream/generations/64fdbb0842ed024f/wal/00000001.wal
