@@ -6,7 +6,7 @@ import (
 )
 
 func Test_CreateRepositorySuccess(t *testing.T) {
-	createRelationalDBPlayerRepository()
+	createRelationalDBPlayerRepository("data")
 	t.Cleanup(func() {
 		os.RemoveAll("data")
 	})
@@ -14,7 +14,7 @@ func Test_CreateRepositorySuccess(t *testing.T) {
 
 func Test_AddPlayerSuccess(t *testing.T) {
 
-	r := createRelationalDBPlayerRepository()
+	r := createRelationalDBPlayerRepository("data")
 
 	err := r.AddPlayer(Player{Tag: "Kirby", Elo: 1000})
 	if err != nil {
@@ -42,7 +42,7 @@ func Test_AddPlayerSuccess(t *testing.T) {
 }
 
 func Test_GetPlayerSuccess(t *testing.T) {
-	r := createRelationalDBPlayerRepository()
+	r := createRelationalDBPlayerRepository("data")
 
 	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirb", 1000)
 	if err != nil {
@@ -67,7 +67,7 @@ func Test_GetPlayerSuccess(t *testing.T) {
 }
 
 func Test_UpdatePlayerEloSuccess(t *testing.T) {
-	r := createRelationalDBPlayerRepository()
+	r := createRelationalDBPlayerRepository("data")
 	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
 	if err != nil {
 		t.Fail()

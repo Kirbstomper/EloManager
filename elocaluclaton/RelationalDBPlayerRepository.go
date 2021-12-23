@@ -16,8 +16,8 @@ type RelationalDBPlayerRepository struct {
 	db database
 }
 
-func createDatabase() *database {
-	dbDir := "data"
+func createDatabase(path string) *database {
+	dbDir := path
 	if _, err := os.Stat(dbDir); os.IsNotExist(err) {
 		os.Mkdir(dbDir, os.ModePerm)
 	}
@@ -49,8 +49,8 @@ func createDatabase() *database {
 /*
 	Creates and returns a new relationalDBPlayerRepositoru
 */
-func createRelationalDBPlayerRepository() RelationalDBPlayerRepository {
-	return RelationalDBPlayerRepository{*createDatabase()}
+func createRelationalDBPlayerRepository(path string) RelationalDBPlayerRepository {
+	return RelationalDBPlayerRepository{*createDatabase(path)}
 }
 
 func (r RelationalDBPlayerRepository) AddPlayer(p Player) error {

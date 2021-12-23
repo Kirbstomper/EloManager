@@ -15,9 +15,10 @@ type Operator struct {
 func CreateInMemoryOperator() Operator {
 	return Operator{repo: createInMemoryRepository()}
 }
-func CreateRealtionalDBOperator() Operator{
-	return Operator{repo: createRelationalDBPlayerRepository()}
+func CreateRealtionalDBOperator() Operator {
+	return Operator{repo: createRelationalDBPlayerRepository("/data")}
 }
+
 /*
 	Creates a new player by adding it to the repository
 */
