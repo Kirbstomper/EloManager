@@ -14,3 +14,12 @@ document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
 
     updatePlayer(playerName, playerElo)
 })
+document.getElementById("get-player-btn").addEventListener("click",(evt)=>{
+    const playerName = document.getElementById("get-player-name").value;
+
+    console.log("Get Player Button Clicked!!!" +"Name: " + playerName);
+
+    getPlayer(playerName)
+    .then((player) =>{ document.getElementById("get-player-result").value = JSON.stringify(player)})
+    
+})

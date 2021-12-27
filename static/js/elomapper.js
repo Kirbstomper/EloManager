@@ -16,3 +16,12 @@ function updatePlayer(playerName, playerElo){
         })
     })
 }
+
+function getPlayer(playerName){
+    return fetch("/getPlayer",{
+        method: "POST",
+        body: JSON.stringify({
+            "tag": playerName
+        })
+    }).then((response) =>response.json())
+}
