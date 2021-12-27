@@ -25,3 +25,14 @@ function getPlayer(playerName){
         })
     }).then((response) =>response.json())
 }
+
+function decideMatch(playerA, playerB, result){
+    return fetch("/decide",{
+        method: "POST",
+        body: JSON.stringify({
+            "playerA": playerA,
+            "playerB":playerB,
+            "result": result
+        })
+    })
+}

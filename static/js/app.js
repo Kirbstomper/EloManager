@@ -18,8 +18,13 @@ document.getElementById("get-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("get-player-name").value;
 
     console.log("Get Player Button Clicked!!!" +"Name: " + playerName);
-
     getPlayer(playerName)
     .then((player) =>{ document.getElementById("get-player-result").value = JSON.stringify(player)})
-    
+})
+document.getElementById("decide-btn").addEventListener("click",(evt)=>{
+    const playerNameA = document.getElementById("decide-player-a").value;
+    const playerNameB = document.getElementById("decide-player-b").value;
+    const result = document.getElementById("decide-result").value;
+    console.log("Decide Match Button Clicked!!!" +"NameA: " + playerNameA + " NameB" + playerNameB + " Result:" + result);
+    decideMatch(playerNameA, playerNameB, result)
 })
