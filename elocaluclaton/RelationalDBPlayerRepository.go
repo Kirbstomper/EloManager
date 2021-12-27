@@ -19,7 +19,10 @@ type RelationalDBPlayerRepository struct {
 func createDatabase(path string) *database {
 	dbDir := path
 	if _, err := os.Stat(dbDir); os.IsNotExist(err) {
-		os.Mkdir(dbDir, os.ModePerm)
+		err = os.Mkdir(dbDir, os.ModePerm)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
 	ctx, err := sql.Open("sqlite3", dbDir+"/repository.db")
 	if err != nil {
