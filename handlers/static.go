@@ -7,7 +7,7 @@ import (
 	"path"
 )
 
-const staticRootDir = "./static"
+const staticRootDir = "/static"
 
 func (s defaultServer) serveStaticResource() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

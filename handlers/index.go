@@ -7,7 +7,7 @@ import (
 )
 
 const indexFilename = "index.html"
-const viewsRootDir = "./views"
+const viewsRootDir = "/views"
 
 func (s defaultServer) serveIndexPage() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
