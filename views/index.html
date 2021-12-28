@@ -7,36 +7,37 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
-	<h1 class ="title">Welcome to EloMapper</h1>
+	<h1 class ="title is-1" >EloMapper</h1>
 </body>
-	<div class="notification" style="display: none;">
+	<div class="notification is-primary" style="display: none;">
 		<button class="delete is-large" onclick="this.parentElement.style.display='none';"></button>
 		<div id="alert-box" ></div>
   </div>
 <div class="box">
-	<h1> Add/Update Player</h1>
+	<h2 class="label"> Add/Update Player</h2>
 	<input class="input" rows ="1" id="add-player-name" placeholder="Player Tag"></input>
 	<input class="input" rows ="1" id="add-player-elo" placeholder="Player Elo"></input>
-	<button class = "button" id="add-player-btn">Add</button>
-	<button class = "button" id="update-player-btn">Update</button>
+	<div class="columns">
+		<div class="column is-half"><button class = "button is-fullwidth" id="add-player-btn">Add</button></div>
+		<div class="column"><button class = "button is-fullwidth" id="update-player-btn">Update</button></div>
+	</div>
 </div>
 <div class="box">
-	<h1>Get Players Elo</h1>
+	<h2 class="label">Get Players Elo</h2>
 	<input class="input" rows ="1" id="get-player-name" placeholder="Player Tag"></input>
-	<button class = "button" id="get-player-btn">Submit</button>
+	<button class = "button is-fullwidth" id="get-player-btn">Submit</button>
 </div>
 <div class="box">
-	<h1>Decide Match and Update Elo</h1>
+	<h2 class="label">Decide Match and Update Elo</h2>
 	<input class="input" rows ="1" id="decide-player-a" placeholder="Player A Tag"></input>
 	<input class="input" rows ="1" id="decide-player-b" placeholder="Player B Tag"></input>
-	<select class="select" id="decide-result" name="decide-result"> 
+	<select class="select is-fullwidth" id="decide-result" name="decide-result"> 
 		<option value="WIN">WIN</option>
 		<option value="LOSS">LOSS</option>
 		<option value="TIE">TIE</option>
 	</select>
-	<button class = "button" id="decide-btn">Submit</button>
+	<button class = "button is-fullwidth" id="decide-btn">Submit</button>
 </div>
-
 <script src="/js/elomapper.js"></script>
 <script src="/js/app.js"></script>
 </html>
