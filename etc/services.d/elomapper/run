@@ -1,2 +1,4 @@
 #!/usr/bin/with-contenv bash
+cp -r /views .
+cp -r /static .
 exec elomapper
