@@ -9,25 +9,26 @@
 </head>
 
 <body>
-	<h1 class="title is-1">EloMapper</h1>
+	<h1 class="title is-1" style="text-align: center;">EloMapper</h1>
 </body>
 <div class="notification is-primary" style="display: none;">
 	<button class="delete is-large" onclick="this.parentElement.style.display='none';"></button>
 	<div id="alert-box"></div>
 </div>
+<div class ="box has-background-info">
 <div class="box">
 	<h2 class="label"> Add/Update Player</h2>
 	<input class="input" rows="1" id="add-player-name" placeholder="Player Tag"></input>
 	<input class="input" rows="1" id="add-player-elo" placeholder="Player Elo"></input>
 	<div class="columns">
-		<div class="column is-half"><button class="button is-fullwidth" id="add-player-btn">Add</button></div>
-		<div class="column"><button class="button is-fullwidth" id="update-player-btn">Update</button></div>
+		<div class="column is-half"><button class="button is-fullwidth is-primary" id="add-player-btn">Add</button></div>
+		<div class="column"><button class="button is-fullwidth is-primary" id="update-player-btn">Update</button></div>
 	</div>
 </div>
 <div class="box">
 	<h2 class="label">Get Players Elo</h2>
 	<input class="input" rows="1" id="get-player-name" placeholder="Player Tag"></input>
-	<button class="button is-fullwidth" id="get-player-btn">Submit</button>
+	<button class="button is-fullwidth is-success" id="get-player-btn">Submit</button>
 </div>
 <div class="box">
 	<h2 class="label">Decide Match and Update Elo</h2>
@@ -38,7 +39,8 @@
 		<option value="LOSS">LOSS</option>
 		<option value="TIE">TIE</option>
 	</select>
-	<button class="button is-fullwidth" id="decide-btn">Submit</button>
+	<button class="button is-fullwidth is-info" id="decide-btn">Submit</button>
+</div>
 </div>
 <script src="/js/elomapper.js"></script>
 <script src="/js/app.js"></script>
