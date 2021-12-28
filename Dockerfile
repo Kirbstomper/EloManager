@@ -46,6 +46,9 @@ EXPOSE 8080
 COPY etc/cont-init.d /etc/cont-init.d
 COPY etc/services.d /etc/services.d
 
+# Copy Static Site files
+COPY views /views
+COPY static /static
 # Copy Litestream configuration file.
 COPY etc/litestream.yml /etc/litestream.yml
 
@@ -56,4 +59,5 @@ ENV S6_KILL_GRACETIME=0
 ENV S6_SYNC_DISKS=1
 
 # Run the s6 init process on entry.
+
 ENTRYPOINT [ "/init" ]
