@@ -1,12 +1,10 @@
 document.getElementById("add-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("add-player-name").value;
     const playerElo = document.getElementById("add-player-elo").value;
-    if(playerName === ""){
-        updateNotification("Player Tag cannot be empty")
+    if(validateIsBlank(playerName, "Player Tag")){
         return
     }
-    if(playerElo === ""){
-        updateNotification("Player Elo cannot be empty")
+    if(validateIsBlank(playerElo, "Player Elo")){
         return
     }
     if(!parseInt(playerElo)){
@@ -20,12 +18,10 @@ document.getElementById("add-player-btn").addEventListener("click",(evt)=>{
 document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("add-player-name").value;
     const playerElo = document.getElementById("add-player-elo").value;
-    if(playerName === ""){
-        updateNotification("Player Tag cannot be empty")
+    if(validateIsBlank(playerName, "Player Tag")){
         return
     }
-    if(playerElo === ""){
-        updateNotification("Player Elo cannot be empty")
+    if(validateIsBlank(playerElo, "Player Elo")){
         return
     }
     if(!parseInt(playerElo)){
@@ -39,9 +35,8 @@ document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
 })
 document.getElementById("get-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("get-player-name").value;
-    if(playerName ===""){
-        updateNotification("Player Tag cannot be empty")
-        return 
+    if(validateIsBlank(playerName, "Player Tag")){
+        return
     }
     console.log("Get Player Button Clicked!!!" +"Name: " + playerName);
     getPlayer(playerName)
@@ -52,14 +47,13 @@ document.getElementById("decide-btn").addEventListener("click",(evt)=>{
     const playerNameB = document.getElementById("decide-player-b").value;
     const result = document.getElementById("decide-result").value;
 
-    if(playerNameA === ""){
-        updateNotification("Player A Tag cannot be empty!")
+    if(validateIsBlank(playerNameA, "Player A Tag")){
         return
     }
-    if(playerNameB === ""){
-        updateNotification("Player B Tag cannot be empty!")
+    if(validateIsBlank(playerNameB, "Player B Tag")){
+        return
     }
-    
+
     console.log("Decide Match Button Clicked!!!" +"NameA: " + playerNameA + " NameB" + playerNameB + " Result:" + result);
     decideMatch(playerNameA, playerNameB, result)
 })
@@ -69,4 +63,12 @@ function updateNotification(value){
 
     noti.innerHTML = value;
     noti.parentElement.style.display = 'block';
+}
+
+function validateIsBlank(field, fieldName){
+    if(field === ""){
+        updateNotification(fieldName + " cannot be blank!")
+        return true
+    }
+    return false
 }
