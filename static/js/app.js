@@ -104,6 +104,10 @@ document.getElementById("decide-btn").addEventListener("click",(evt)=>{
     })
 })
 
+document.getElementById("get-player-list-btn").addEventListener("click", (evt)=>{
+    console.log("Get Player List button clicked!")
+})
+
 function updateNotification(value){
     const noti = document.getElementById("alert-box");
 
