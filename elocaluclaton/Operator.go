@@ -12,9 +12,6 @@ type Operator struct {
 	repo PlayerRepository
 }
 
-func CreateInMemoryOperator() Operator {
-	return Operator{repo: createInMemoryRepository()}
-}
 func CreateRealtionalDBOperator() Operator {
 	return Operator{repo: createRelationalDBPlayerRepository("/data")}
 }
@@ -99,4 +96,8 @@ func (o Operator) RunMatch(tagA, tagB string, outcome int) error {
 	}
 
 	return err
+}
+
+func (o Operator) GetAllPlayers() ([]Player, error) {
+	return o.repo.GetAllPlayers()
 }

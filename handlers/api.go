@@ -85,12 +85,27 @@ func (s defaultServer) retrievePlayerInformation() http.HandlerFunc {
 		}
 		p, err = s.op.RetrievePlayerInformation(p.Tag)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = json.NewEncoder(w).Encode(p)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
+func (s defaultServer) getAllPlayers() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		players, err := s.op.GetAllPlayers()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadGateway)
+			return
+		}
+		err = json.NewEncoder(w).Encode(players)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
 		}
 	}
