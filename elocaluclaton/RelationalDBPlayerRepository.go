@@ -108,3 +108,28 @@ func (r RelationalDBPlayerRepository) UpdatePlayerElo(tag string, elo int) error
 	_, err = stmt.Exec(elo, p.Tag)
 	return err
 }
+
+func (r RelationalDBPlayerRepository) GetAllPlayers() ([]Player, error) {
+
+	players := make([]Player, 0)
+	stmt, err := r.db.ctx.Prepare("SELECT tag,elo FROM players ORDER BY elo DESC")
+	if err != nil {
+		return nil, err
+	}
+	res, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+
+	for res.Next() {
+		var t string
+		var e int
+		err := res.Scan(&t, &e)
+		if err != nil {
+			return nil, err
+		}
+		players = append(players, Player{Tag: t, Elo: e})
+	}
+
+	return players, err
+}
