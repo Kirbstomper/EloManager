@@ -72,6 +72,10 @@ document.getElementById("decide-btn").addEventListener("click",(evt)=>{
     const playerNameB = document.getElementById("decide-player-b").value;
     const result = document.getElementById("decide-result").value;
 
+    if(playerNameA === playerNameB){
+        updateNotification("Player A and B cannot be the same!")
+        return
+    }
     if(validateIsBlank(playerNameA, "Player A Tag")){
         return
     }
