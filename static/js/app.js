@@ -14,6 +14,15 @@ document.getElementById("add-player-btn").addEventListener("click",(evt)=>{
     console.log("Add Player Button Clicked!!!" +"Name: " +playerName +" elo: " + playerElo);
 
     addPlayer(playerName, playerElo)
+    .then( async (response) => {
+        if (response.ok){
+            let data = await response.json();
+            updateNotification(JSON.stringify(data));
+        }else{
+            let data = await response.text();
+            updateNotification(data);
+        }
+    })
 })
 document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("add-player-name").value;
@@ -31,7 +40,15 @@ document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
     console.log("Update Player Button Clicked!!!" +"Name: " +playerName +" elo: " + playerElo);
 
     updatePlayer(playerName, playerElo)
-    
+    .then( async (response) => {
+        if (response.ok){
+            let data = await response.json();
+            updateNotification(JSON.stringify(data));
+        }else{
+            let data = await response.text();
+            updateNotification(data);
+        }
+    })
 })
 document.getElementById("get-player-btn").addEventListener("click",(evt)=>{
     const playerName = document.getElementById("get-player-name").value;
@@ -40,7 +57,15 @@ document.getElementById("get-player-btn").addEventListener("click",(evt)=>{
     }
     console.log("Get Player Button Clicked!!!" +"Name: " + playerName);
     getPlayer(playerName)
-    .then((player) =>{ updateNotification(JSON.stringify(player))})
+    .then( async (response) => {
+        if (response.ok){
+            let data = await response.json();
+            updateNotification(JSON.stringify(data));
+        }else{
+            let data = await response.text();
+            updateNotification(data);
+        }
+    })
 })
 document.getElementById("decide-btn").addEventListener("click",(evt)=>{
     const playerNameA = document.getElementById("decide-player-a").value;
@@ -56,6 +81,15 @@ document.getElementById("decide-btn").addEventListener("click",(evt)=>{
 
     console.log("Decide Match Button Clicked!!!" +"NameA: " + playerNameA + " NameB" + playerNameB + " Result:" + result);
     decideMatch(playerNameA, playerNameB, result)
+    .then( async (response) => {
+        if (response.ok){
+            let data = await response.json();
+            updateNotification(JSON.stringify(data));
+        }else{
+            let data = await response.text();
+            updateNotification(data);
+        }
+    })
 })
 
 function updateNotification(value){

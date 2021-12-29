@@ -23,7 +23,8 @@ function getPlayer(playerName){
         body: JSON.stringify({
             "tag": playerName
         })
-    }).then((response) =>response.json())
+    })
+    
 }
 
 function decideMatch(playerA, playerB, result){
