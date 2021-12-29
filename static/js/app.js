@@ -115,6 +115,10 @@ document.getElementById("get-player-list-btn").addEventListener("click", (evt)=>
     })
 })
 
+document.getElementById("delete-player-btn").addEventListener("click", (evt)=> {
+    console.log("Delete Player Button Clicked!")
+} )
+
 function updateNotification(value){
     const noti = document.getElementById("alert-box");
 
