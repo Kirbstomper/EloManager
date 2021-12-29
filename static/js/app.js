@@ -104,6 +104,17 @@ document.getElementById("decide-btn").addEventListener("click",(evt)=>{
     })
 })
 
+document.getElementById("get-player-list-btn").addEventListener("click", (evt)=>{
+    console.log("Get Player List button clicked!")
+    getPlayerList()
+    .then( async (response) => {
+        if (response.ok){
+            let data = await response.json();
+            updateNotification(JSON.stringify(data))
+        }
+    })
+})
+
 function updateNotification(value){
     const noti = document.getElementById("alert-box");
 

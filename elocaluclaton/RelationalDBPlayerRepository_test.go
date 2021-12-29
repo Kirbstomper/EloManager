@@ -87,3 +87,86 @@ func Test_UpdatePlayerEloSuccess(t *testing.T) {
 		os.RemoveAll("data")
 	})
 }
+
+func Test_GetAllPlayers_Success(t *testing.T) {
+	r := createRelationalDBPlayerRepository("data")
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
+	if err != nil {
+		t.Fail()
+	}
+	_, err = r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Paul", 6969)
+	if err != nil {
+		t.Fail()
+	}
+	_, err = r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Alex", 420)
+	if err != nil {
+		t.Fail()
+	}
+
+	players, err := r.GetAllPlayers()
+
+	if players == nil {
+		t.Fail()
+	}
+	if len(players) != 3 {
+		t.Fail()
+	}
+	if err != nil {
+		t.Fail()
+	}
+	t.Cleanup(func() {
+		os.RemoveAll("data")
+	})
+}
+func Test_GetAllPlayers_ReturnsSorted_Success(t *testing.T) {
+	r := createRelationalDBPlayerRepository("data")
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
+	if err != nil {
+		t.Fail()
+	}
+	_, err = r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Paul", 6969)
+	if err != nil {
+		t.Fail()
+	}
+	_, err = r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Alex", 420)
+	if err != nil {
+		t.Fail()
+	}
+
+	players, err := r.GetAllPlayers()
+
+	if players == nil {
+		t.Fail()
+	}
+	if len(players) != 3 {
+		t.Fail()
+	}
+	if players[0].Tag != "Paul" {
+		t.Fail()
+	}
+	if err != nil {
+		t.Fail()
+	}
+	t.Cleanup(func() {
+		os.RemoveAll("data")
+	})
+}
+func Test_GetAllPlayers_WhenEmpty(t *testing.T) {
+
+	r := createRelationalDBPlayerRepository("data")
+
+	players, err := r.GetAllPlayers()
+
+	if players == nil {
+		t.Fail()
+	}
+	if len(players) != 0 {
+		t.Fail()
+	}
+	if err != nil {
+		t.Fail()
+	}
+	t.Cleanup(func() {
+		os.RemoveAll("data")
+	})
+}

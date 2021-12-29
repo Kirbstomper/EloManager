@@ -37,3 +37,9 @@ function decideMatch(playerA, playerB, result){
         })
     })
 }
+
+function getPlayerList(){
+    return fetch("/getAllPlayers",{
+        method: "GET",
+    })
+}

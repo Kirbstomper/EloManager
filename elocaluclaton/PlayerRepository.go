@@ -19,6 +19,7 @@ type PlayerRepository interface {
 	AddPlayer(Player) error
 	GetPlayer(string) (Player, error)
 	UpdatePlayerElo(string, int) error
+	GetAllPlayers() ([]Player, error)
 	//DeletePlayer(string) error
 }
 
