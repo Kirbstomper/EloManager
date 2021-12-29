@@ -100,12 +100,28 @@ func (s defaultServer) getAllPlayers() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		players, err := s.op.GetAllPlayers()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadGateway)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = json.NewEncoder(w).Encode(players)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadGateway)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+}
+
+func (s defaultServer) deletePlayer() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var p elocaluclaton.Player
+		err := json.NewDecoder(r.Body).Decode(&p)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		err = s.op.DeletePlayer(p.Tag)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}

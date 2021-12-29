@@ -20,7 +20,7 @@ type PlayerRepository interface {
 	GetPlayer(string) (Player, error)
 	UpdatePlayerElo(string, int) error
 	GetAllPlayers() ([]Player, error)
-	//DeletePlayer(string) error
+	DeletePlayer(string) error
 }
 
 func ValidateAddPlayer(p Player) error {

@@ -133,3 +133,8 @@ func (r RelationalDBPlayerRepository) GetAllPlayers() ([]Player, error) {
 
 	return players, err
 }
+
+func (r RelationalDBPlayerRepository) DeletePlayer(tag string) error {
+	_, err := r.db.ctx.Exec(`DELETE FROM players WHERE tag=?`, tag)
+	return err
+}

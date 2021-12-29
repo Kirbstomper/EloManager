@@ -16,4 +16,5 @@ func (s *defaultServer) routes() {
 	s.router.Path("/updateElo").HandlerFunc(s.updatePlayerElo()).Methods(http.MethodPost)
 	s.router.Path("/getPlayer").HandlerFunc(s.retrievePlayerInformation()).Methods(http.MethodPost)
 	s.router.Path("/getAllPlayers").HandlerFunc(s.getAllPlayers()).Methods(http.MethodGet)
+	s.router.Path("/deletePlayer").HandlerFunc(s.deletePlayer()).Methods(http.MethodPost)
 }

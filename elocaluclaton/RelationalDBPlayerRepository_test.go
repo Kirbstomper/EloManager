@@ -170,3 +170,39 @@ func Test_GetAllPlayers_WhenEmpty(t *testing.T) {
 		os.RemoveAll("data")
 	})
 }
+func Test_DeletePlayer_Success(t *testing.T) {
+
+	r := createRelationalDBPlayerRepository("data")
+
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
+	if err != nil {
+		t.Fail()
+	}
+
+	err = r.DeletePlayer("Kirby")
+	if err != nil {
+		t.Fail()
+	}
+
+	var tag string
+	err = r.db.ctx.QueryRow("SELECT tag FROM players WHERE tag=?", "Kirby").Scan(&tag)
+	if tag != "" {
+		t.Fail()
+	}
+
+}
+func Test_DeletePlayer_PlayerDoesNotExist(t *testing.T) {
+
+	r := createRelationalDBPlayerRepository("data")
+
+	_, err := r.db.ctx.Exec(`INSERT INTO players(tag, elo) values(?,?)`, "Kirby", 1000)
+	if err != nil {
+		t.Fail()
+	}
+
+	err = r.DeletePlayer("John")
+	if err != nil {
+		t.Fail()
+	}
+
+}

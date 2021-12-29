@@ -101,3 +101,7 @@ func (o Operator) RunMatch(tagA, tagB string, outcome int) error {
 func (o Operator) GetAllPlayers() ([]Player, error) {
 	return o.repo.GetAllPlayers()
 }
+
+func (o Operator) DeletePlayer(tag string) error {
+	return o.repo.DeletePlayer(tag)
+}

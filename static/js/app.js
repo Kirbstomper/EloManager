@@ -115,6 +115,20 @@ document.getElementById("get-player-list-btn").addEventListener("click", (evt)=>
     })
 })
 
+document.getElementById("delete-player-btn").addEventListener("click", (evt)=> {
+    console.log("Delete Player Button Clicked!")
+    const playerName = document.getElementById("delete-player-name").value;
+    if(validateIsBlank(playerName, "Player Tag")){
+        return
+    }
+    deletePlayer(playerName).then(async (response) => {
+        if(!response.ok){
+           updateNotification("Something went wrong")
+        }
+    })
+
+} )
+
 function updateNotification(value){
     const noti = document.getElementById("alert-box");
 

@@ -43,3 +43,12 @@ function getPlayerList(){
         method: "GET",
     })
 }
+
+function deletePlayer(playerName){
+    return fetch("/deletePlayer",{
+        method: "POST",
+        body: JSON.stringify({
+            "Tag": playerName
+        })
+    })
+}
