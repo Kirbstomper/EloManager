@@ -11,6 +11,10 @@ document.getElementById("add-player-btn").addEventListener("click",(evt)=>{
         updateNotification("Elo must be a number")
         return
     }
+    if(parseInt(playerElo) < 0){
+        updateNotification("Elo cannot be negative")
+        return
+    }
     console.log("Add Player Button Clicked!!!" +"Name: " +playerName +" elo: " + playerElo);
 
     addPlayer(playerName, playerElo)
@@ -35,6 +39,10 @@ document.getElementById("update-player-btn").addEventListener("click",(evt)=>{
     }
     if(!parseInt(playerElo)){
         updateNotification("Elo must be a number")
+        return
+    }
+    if(parseInt(playerElo) < 0){
+        updateNotification("Elo cannot be negative")
         return
     }
     console.log("Update Player Button Clicked!!!" +"Name: " +playerName +" elo: " + playerElo);
